@@ -257,6 +257,8 @@ GEM
       rspec-support (~> 3.13)
     rspec-support (3.13.7)
     securerandom (0.4.1)
+    shoulda-matchers (7.0.1)
+      activesupport (>= 7.1)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -317,6 +319,7 @@ DEPENDENCIES
   rails (~> 7.1.3)
   react-rails
   rspec-rails
+  shoulda-matchers
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
