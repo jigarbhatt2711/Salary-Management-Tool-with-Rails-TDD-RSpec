@@ -66,3 +66,4 @@ end
 gem 'react-rails'
 gem 'mini_mime'
 gem 'rack-cors'
+gem "kaminari"
