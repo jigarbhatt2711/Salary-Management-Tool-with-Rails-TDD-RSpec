@@ -1,0 +1,12 @@
+AllCops:
+  TargetRailsVersion: 7.0
+  Exclude:
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'spec/fixtures/**/*'
+
+Rails:
+  Enabled: true
+
+Security:
+  Enabled: true
