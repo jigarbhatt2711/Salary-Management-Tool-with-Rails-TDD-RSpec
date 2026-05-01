@@ -48,7 +48,7 @@ RSpec.describe Api::V1::EmployeesController, type: :controller do
 
     it 'returns validation errors' do
       post :create, params: { employee: { full_name: 'John' } }
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
   end
 

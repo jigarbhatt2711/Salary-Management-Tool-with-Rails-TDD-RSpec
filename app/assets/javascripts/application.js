@@ -1,3 +1,2 @@
-//= require react
-//= require react_ujs
-//= require components
+import './components'
+console.log('React application mounted successfully')

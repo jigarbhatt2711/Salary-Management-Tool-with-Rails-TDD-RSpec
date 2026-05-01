@@ -1,10 +1,11 @@
 module Api
   module V1
     class EmployeesController < ApplicationController
+      skip_before_action :verify_authenticity_token
       before_action :set_employee, only: [:show, :update, :destroy]
 
       def index
-        @employees = Employee.all.page(params[:page]).per(50)
+        @employees = Employee.order("created_at DESC").page(params[:page]).per(50)
         render json: @employees, status: :ok
       end
 
@@ -17,7 +18,7 @@ module Api
         if @employee.save
           render json: @employee, status: :created
         else
-          render json: { errors: @employee.errors.full_messages }, status: :unprocessable_entity
+          render json: { errors: @employee.errors.full_messages }, status: :unprocessable_content
         end
       end
 
@@ -25,7 +26,7 @@ module Api
         if @employee.update(employee_params)
           render json: @employee, status: :ok
         else
-          render json: { errors: @employee.errors.full_messages }, status: :unprocessable_entity
+          render json: { errors: @employee.errors.full_messages }, status: :unprocessable_content
         end
       end
 

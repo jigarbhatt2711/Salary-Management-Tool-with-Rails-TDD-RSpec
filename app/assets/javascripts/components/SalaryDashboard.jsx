@@ -28,7 +28,7 @@ export default function SalaryDashboard({ refresh }) {
   const cards = [
     {
       title: 'Total Employees',
-      value: (insights.total_employees || 0).toLocaleString(),
+      value: insights.total_employees?.toLocaleString() || '0',
       color: 'bg-blue-50 border-blue-200',
       textColor: 'text-blue-600',
       icon: '👥'
@@ -56,14 +56,14 @@ export default function SalaryDashboard({ refresh }) {
     },
     {
       title: 'Countries',
-      value: (insights.countries || 0).toString(),
+      value: insights.countries || '0',
       color: 'bg-indigo-50 border-indigo-200',
       textColor: 'text-indigo-600',
       icon: '🌍'
     },
     {
       title: 'Job Titles',
-      value: (insights.job_titles || 0).toString(),
+      value: insights.job_titles || '0',
       color: 'bg-pink-50 border-pink-200',
       textColor: 'text-pink-600',
       icon: '💼'
