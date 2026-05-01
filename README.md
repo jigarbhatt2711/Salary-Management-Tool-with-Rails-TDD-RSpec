@@ -98,8 +98,8 @@ Before you begin, ensure you have the following installed:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/jigarbhatt2711/salary_management.git
-cd salary_management
+git clone https://github.com/jigarbhatt2711/Salary-Management-Tool-with-Rails-TDD-RSpec.git
+cd Salary-Management-Tool-with-Rails-TDD-RSpec
 ```
 
 ### Step 2: Install Ruby Dependencies

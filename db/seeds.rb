@@ -4,7 +4,7 @@ require 'csv'
 
 Employee.delete_all
 
-Rails.logger.debug 'Seeding 10,000 employees...'
+puts 'Seeding 10,000 employees...'
 start_time = Time.zone.now
 
 # Predefined lists for consistent seeding
@@ -36,5 +36,5 @@ end
 Employee.insert_all(employees_data)
 
 elapsed_time = Time.zone.now - start_time
-Rails.logger.debug "✓ Seeded 10,000 employees in #{elapsed_time.round(2)}s"
-Rails.logger.debug "Average: #{(10_000 / elapsed_time).round(0)} employees/second"
+puts "✓ Seeded 10,000 employees in #{elapsed_time.round(2)}s"
+puts "Average: #{(10_000 / elapsed_time).round(0)} employees/second"
