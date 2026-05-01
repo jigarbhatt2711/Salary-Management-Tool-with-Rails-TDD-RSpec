@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function EmployeeList({ refresh }) {
+  const navigate = useNavigate()
   const [employees, setEmployees] = useState([])
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
@@ -89,7 +91,9 @@ export default function EmployeeList({ refresh }) {
     setPage(1) // Reset to page 1 when filtering
   }
 
-  const deleteEmployee = async (id) => {
+  const deleteEmployee = async (id, e) => {
+    e.stopPropagation() // Prevent navigation when clicking delete
+    
     if (window.confirm('Are you sure you want to delete this employee?')) {
       try {
         const response = await fetch(`/api/v1/employees/${id}`, {
@@ -104,6 +108,10 @@ export default function EmployeeList({ refresh }) {
         alert('Failed to delete employee')
       }
     }
+  }
+
+  const handleRowClick = (employeeId) => {
+    navigate(`/employees/${employeeId}`)
   }
 
   if (loading && employees.length === 0) {
@@ -189,7 +197,11 @@ export default function EmployeeList({ refresh }) {
             </thead>
             <tbody>
               {employees.map((emp) => (
-                <tr key={emp.id} className="border-b hover:bg-gray-50">
+                <tr
+                  key={emp.id}
+                  onClick={() => handleRowClick(emp.id)}
+                  className="border-b hover:bg-blue-50 cursor-pointer transition"
+                >
                   <td className="px-4 py-3 text-sm font-medium">{emp.full_name}</td>
                   <td className="px-4 py-3 text-sm">{emp.job_title}</td>
                   <td className="px-4 py-3 text-sm">
@@ -203,7 +215,7 @@ export default function EmployeeList({ refresh }) {
                   <td className="px-4 py-3 text-sm">{emp.department}</td>
                   <td className="px-4 py-3 text-sm">
                     <button
-                      onClick={() => deleteEmployee(emp.id)}
+                      onClick={(e) => deleteEmployee(emp.id, e)}
                       className="text-red-600 hover:text-red-800 text-xs font-medium hover:underline"
                     >
                       Delete
