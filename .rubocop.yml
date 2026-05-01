@@ -18,3 +18,9 @@ AllCops:
 
 Rails/Output:
   Enabled: false
+
+Metrics/BlockLength:
+  Max: 300
+
+Metrics/AbcSize:
+  Max: 25

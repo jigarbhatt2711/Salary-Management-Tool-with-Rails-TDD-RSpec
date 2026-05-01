@@ -8,8 +8,30 @@ module Api
       before_action :set_employee, only: %i[show update destroy]
 
       def index
-        @employees = Employee.order('created_at DESC').page(params[:page]).per(50)
-        render json: @employees, status: :ok
+        @employees = Employee.order('created_at DESC')
+
+        # Search by full_name (case-insensitive)
+        if params[:search].present?
+          search_term = params[:search].strip
+          # SQLite LIKE is case-insensitive by default
+          @employees = @employees.where('full_name LIKE ?', "%#{search_term}%")
+        end
+
+        # Filter by country
+        @employees = @employees.where(country: params[:country]) if params[:country].present?
+
+        # Paginate
+        @employees = @employees.page(params[:page]).per(50)
+
+        render json: {
+          data: @employees,
+          pagination: {
+            page: @employees.current_page,
+            per_page: 50,
+            total: @employees.total_count,
+            total_pages: @employees.total_pages
+          }
+        }
       end
 
       def show
@@ -34,26 +56,26 @@ module Api
       end
 
       def destroy
-        @employee.destroy
-        render json: { message: 'Employee deleted successfully' }, status: :no_content
+        if @employee.destroy
+          head :no_content
+        else
+          render json: { errors: 'Failed to delete' }, status: :unprocessable_content
+        end
       end
 
       def salary_insights
         service = SalaryInsightsService.new
-        insights = service.global_insights
-        render json: insights, status: :ok
+        render json: service.global_insights
       end
 
       def country_insights
         service = SalaryInsightsService.new
-        insights = service.country_insights(params[:country])
-        render json: insights, status: :ok
+        render json: service.country_insights(params[:country])
       end
 
       def job_title_insights
         service = SalaryInsightsService.new
-        insights = service.job_title_insights(params[:job_title], params[:country])
-        render json: insights, status: :ok
+        render json: service.job_title_insights(params[:job_title], params[:country])
       end
 
       private
