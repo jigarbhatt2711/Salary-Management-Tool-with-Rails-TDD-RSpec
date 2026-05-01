@@ -1,12 +1,14 @@
-AllCops:
-  TargetRailsVersion: 7.0
-  Exclude:
-    - 'bin/**/*'
-    - 'vendor/**/*'
-    - 'spec/fixtures/**/*'
+require:
+  - rubocop-rails
 
-Rails:
-  Enabled: true
+Style/Documentation:
+  Enabled: false
 
-Security:
-  Enabled: true
+Metrics/BlockLength:
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 20
+
+Rails/SkipsModelValidations:
+  Enabled: false

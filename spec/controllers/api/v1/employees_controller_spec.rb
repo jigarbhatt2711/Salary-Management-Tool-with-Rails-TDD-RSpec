@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Api::V1::EmployeesController, type: :controller do
@@ -21,7 +23,7 @@ RSpec.describe Api::V1::EmployeesController, type: :controller do
     end
 
     it 'returns 404 for non-existent employee' do
-      get :show, params: { id: 99999 }
+      get :show, params: { id: 99_999 }
       expect(response).to have_http_status(:not_found)
     end
   end
@@ -33,16 +35,16 @@ RSpec.describe Api::V1::EmployeesController, type: :controller do
           full_name: 'John Doe',
           job_title: 'Engineer',
           country: 'US',
-          salary: 100000,
+          salary: 100_000,
           employee_id: SecureRandom.uuid
         }
       }
     end
 
     it 'creates a new employee' do
-      expect {
+      expect do
         post :create, params: valid_params
-      }.to change(Employee, :count).by(1)
+      end.to change(Employee, :count).by(1)
       expect(response).to have_http_status(:created)
     end
 
@@ -57,14 +59,14 @@ RSpec.describe Api::V1::EmployeesController, type: :controller do
     let(:update_params) do
       {
         id: employee.id,
-        employee: { salary: 150000 }
+        employee: { salary: 150_000 }
       }
     end
 
     it 'updates the employee' do
       put :update, params: update_params
       expect(response).to have_http_status(:ok)
-      expect(employee.reload.salary).to eq(150000)
+      expect(employee.reload.salary).to eq(150_000)
     end
   end
 
@@ -72,17 +74,17 @@ RSpec.describe Api::V1::EmployeesController, type: :controller do
     let!(:employee) { create(:employee) }
 
     it 'deletes the employee' do
-      expect {
+      expect do
         delete :destroy, params: { id: employee.id }
-      }.to change(Employee, :count).by(-1)
+      end.to change(Employee, :count).by(-1)
       expect(response).to have_http_status(:no_content)
     end
   end
 
   describe 'GET #salary_insights' do
     before do
-      create(:employee, salary: 50000)
-      create(:employee, salary: 100000)
+      create(:employee, salary: 50_000)
+      create(:employee, salary: 100_000)
     end
 
     it 'returns global salary insights' do
@@ -90,7 +92,7 @@ RSpec.describe Api::V1::EmployeesController, type: :controller do
       expect(response).to have_http_status(:ok)
       data = JSON.parse(response.body)
       expect(data['total_employees']).to eq(2)
-      expect(data['min_salary']).to eq(50000)
+      expect(data['min_salary']).to eq(50_000)
     end
   end
 end

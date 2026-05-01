@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 module Api
   module V1
+    # Handles employee-related API actions
     class EmployeesController < ApplicationController
       skip_before_action :verify_authenticity_token
-      before_action :set_employee, only: [:show, :update, :destroy]
+      before_action :set_employee, only: %i[show update destroy]
 
       def index
-        @employees = Employee.order("created_at DESC").page(params[:page]).per(50)
+        @employees = Employee.order('created_at DESC').page(params[:page]).per(50)
         render json: @employees, status: :ok
       end
 

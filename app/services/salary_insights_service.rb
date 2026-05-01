@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SalaryInsightsService
   def initialize
     @employees = Employee.all

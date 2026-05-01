@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Employee, type: :model do
@@ -32,16 +34,16 @@ RSpec.describe Employee, type: :model do
 
   describe '.stats' do
     before do
-      create(:employee, salary: 50000)
-      create(:employee, salary: 100000)
-      create(:employee, salary: 150000)
+      create(:employee, salary: 50_000)
+      create(:employee, salary: 100_000)
+      create(:employee, salary: 150_000)
     end
 
     it 'calculates correct salary statistics' do
       stats = Employee.stats
-      expect(stats[:min_salary]).to eq(50000)
-      expect(stats[:max_salary]).to eq(150000)
-      expect(stats[:avg_salary]).to eq(100000.0)
+      expect(stats[:min_salary]).to eq(50_000)
+      expect(stats[:max_salary]).to eq(150_000)
+      expect(stats[:avg_salary]).to eq(100_000.0)
       expect(stats[:count]).to eq(3)
     end
   end
