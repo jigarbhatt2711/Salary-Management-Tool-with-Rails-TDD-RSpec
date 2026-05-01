@@ -10,24 +10,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:14-alpine
-        ports:
-          - "5432:5432"
-        env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
-        options: >-
-          --health-cmd="pg_isready -U rails"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-
     env:
       RAILS_ENV: test
-      DATABASE_URL: postgres://rails:password@localhost:5432/rails_test
 
     steps:
       - name: Checkout code
@@ -38,6 +22,9 @@ jobs:
         with:
           ruby-version: 3.2.2
           bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install
 
       - name: Setup database
         run: bin/rails db:prepare
@@ -59,10 +46,13 @@ jobs:
           bundler-cache: true
 
       - name: Install binstubs
-        run: bundle binstubs bundler-audit brakeman rubocop
+        run: bundle binstubs bundler-audit brakeman
 
       - name: Security audit dependencies
         run: bundle exec bundler-audit --update
 
       - name: Security audit code
         run: bundle exec brakeman -q -w2
+
+      - name: Lint Ruby code
+        run: bundle exec rubocop --parallel
