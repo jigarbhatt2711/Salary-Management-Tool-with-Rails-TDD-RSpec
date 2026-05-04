@@ -7,9 +7,14 @@ Employee.delete_all
 puts 'Seeding 10,000 employees...'
 start_time = Time.zone.now
 
-# Predefined lists for consistent seeding
-first_names = %w[John Jane Michael Sarah Robert Emily David Jessica James Jennifer]
-last_names = %w[Smith Johnson Brown Davis Wilson Martinez Rodriguez Taylor Anderson Taylor]
+# Load names from external files
+first_names_file = Rails.root.join('db/seeds/first_names.txt')
+last_names_file  = Rails.root.join('db/seeds/last_names.txt')
+
+first_names = File.readlines(first_names_file).map(&:strip).reject(&:empty?)
+last_names = File.readlines(last_names_file).map(&:strip).reject(&:empty?)
+
+puts "Loaded #{first_names.count} first names and #{last_names.count} last names"
 
 job_titles = ['Software Engineer', 'Product Manager', 'Designer', 'Data Analyst', 'DevOps Engineer', 'Manager',
               'Director', 'Consultant']
