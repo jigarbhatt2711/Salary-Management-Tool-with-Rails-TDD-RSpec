@@ -19,13 +19,10 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">💰 Salary Management System</h1>
-          <p className="text-gray-600 mt-1">Manage 10,000+ employees with ease</p>
-        </div>
-      </header>
-
+      <Header
+        title="💰 Salary Management System"
+        subtitle="Manage 10,000+ employees with ease"
+      />
       <nav className="bg-white border-b sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 flex gap-8">
           <button
