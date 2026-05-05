@@ -28,7 +28,7 @@ export default function SalaryDashboard({ refresh }) {
   const cards = [
     {
       title: 'Total Employees',
-      value: insights.total_employees?.toLocaleString() || '0',
+      value: (insights.total_employees && insights.total_employees.toLocaleString()) || '0',
       color: 'bg-blue-50 border-blue-200',
       textColor: 'text-blue-600',
       icon: '👥'
