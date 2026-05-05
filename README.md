@@ -2,17 +2,19 @@
 
 ## 🎯 Project Overview
 
-This is a comprehensive salary management system built to demonstrate:
+A comprehensive salary management system built to demonstrate:
 
-- **Full-stack development** with Rails backend and React frontend
+- **Full-stack development** with a Rails backend and React frontend
 - **Test-Driven Development (TDD)** with RSpec
 - **Production-quality code** with security best practices (Brakeman-compliant)
-- **Performance optimization** for 10,000+ employee datasets
-- **Modern development practices** with esbuild, Tailwind CSS, and proper asset management
+- **Performance optimization** for datasets of 10,000+ employees
+- **Modern development practices** using esbuild, Tailwind CSS, and proper asset management
 
-## 🌐 Live Application: http://13.233.184.60/
+## 🌐 Live Application
 
-**Target User:** HR Managers managing large organizations
+**[http://13.233.184.60/](http://13.233.184.60/)**
+
+**Target User:** HR managers overseeing large organizations
 
 ---
 
@@ -24,7 +26,7 @@ This is a comprehensive salary management system built to demonstrate:
 - ✅ Search employees by name
 - ✅ Filter employees by country
 - ✅ Paginated employee list (50 per page)
-- ✅ Rich employee data (name, job title, country, salary, department, job level, start date)
+- ✅ Rich employee data — name, job title, country, salary, department, job level, and start date
 
 ### Salary Insights Dashboard
 
@@ -58,7 +60,7 @@ This is a comprehensive salary management system built to demonstrate:
 
 - **Rails 7.1.6** — Web framework
 - **SQLite** — Primary database
-- **Propshaft** — Asset pipeline (Rails 8+ default)
+- **Sprockets** — Asset pipeline
 - **Kaminari** — Pagination
 - **Rack CORS** — Cross-origin resource sharing
 
@@ -73,9 +75,9 @@ This is a comprehensive salary management system built to demonstrate:
 
 - **RSpec** — BDD testing framework
 - **FactoryBot** — Test data generation
-- **Faker** — Realistic data generation
+- **Faker** — Realistic fake data generation
 - **Shoulda-Matchers** — Concise model specs
-- **WebMock** — HTTP mocking
+- **WebMock** — HTTP request mocking
 
 ### DevOps & Security
 
@@ -87,12 +89,15 @@ This is a comprehensive salary management system built to demonstrate:
 
 ## 📦 Prerequisites
 
-Before you begin, ensure you have the following installed:
+Ensure the following are installed before you begin:
 
-- **Ruby --version 3.2.2**
-- **node --version 16+**
-- **npm --version 8+**
-- **Rails --version 7.2.3.1**
+| Tool | Required Version |
+|------|-----------------|
+| Ruby | 3.2.2 |
+| Node.js | 16+ |
+| npm | 8+ |
+| Rails | 7.2.3.1 |
+
 ---
 
 ## 🚀 Installation
@@ -141,7 +146,7 @@ npm run build
 ./bin/dev
 ```
 
-This runs:
+This starts:
 
 - Rails server on `http://localhost:3000`
 - esbuild watcher
@@ -195,21 +200,24 @@ bundle exec rspec
 | PUT | `/employees/:id` | Update an employee |
 | DELETE | `/employees/:id` | Delete an employee |
 | GET | `/employees/salary_insights` | Global salary statistics |
-| GET | `/employees/country_insights?country=US` | Country-specific stats |
-| GET | `/employees/job_title_insights?job_title=Engineer&country=US` | Job title stats |
+| GET | `/employees/country_insights?country=US` | Country-specific statistics |
+| GET | `/employees/job_title_insights?job_title=Engineer&country=US` | Job title statistics |
+
+---
 
 ## 🚀 Deployment
 
 This application is deployed on AWS EC2 and configured for production use.
 
 ### 🌐 Live Application
-http://13.233.184.60/
 
-## ⚙️ Production Setup
+[http://13.233.184.60/](http://13.233.184.60/)
 
-The application is deployed using a production-ready stack:
+### ⚙️ Production Stack
 
-- **Web Server:** Nginx  
-- **Application Server:** Puma  
-- **Hosting:** AWS EC2 (Ubuntu)  
-- **Architecture:** Reverse proxy setup (Nginx → Puma → Rails)
+| Layer | Technology |
+|-------|-----------|
+| Web server | Nginx |
+| Application server | Puma |
+| Hosting | AWS EC2 (Ubuntu) |
+| Architecture | Reverse proxy (Nginx → Puma → Rails) |
