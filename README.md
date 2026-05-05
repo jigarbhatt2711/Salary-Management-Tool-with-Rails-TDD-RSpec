@@ -10,6 +10,8 @@ This is a comprehensive salary management system built to demonstrate:
 - **Performance optimization** for 10,000+ employee datasets
 - **Modern development practices** with esbuild, Tailwind CSS, and proper asset management
 
+## 🌐 Live Application: http://13.233.184.60/
+
 **Target User:** HR Managers managing large organizations
 
 ---
@@ -55,7 +57,7 @@ This is a comprehensive salary management system built to demonstrate:
 ### Backend
 
 - **Rails 7.1.6** — Web framework
-- **PostgreSQL** — Primary database
+- **SQLite** — Primary database
 - **Propshaft** — Asset pipeline (Rails 8+ default)
 - **Kaminari** — Pagination
 - **Rack CORS** — Cross-origin resource sharing
@@ -183,7 +185,7 @@ bundle exec rspec
 
 ## 📡 API Endpoints
 
-**Base URL:** `http://localhost:3000/api/v1`
+**Base URL:** `http://13.233.184.60/api/v1`
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -196,3 +198,18 @@ bundle exec rspec
 | GET | `/employees/country_insights?country=US` | Country-specific stats |
 | GET | `/employees/job_title_insights?job_title=Engineer&country=US` | Job title stats |
 
+## 🚀 Deployment
+
+This application is deployed on AWS EC2 and configured for production use.
+
+### 🌐 Live Application
+http://13.233.184.60/
+
+## ⚙️ Production Setup
+
+The application is deployed using a production-ready stack:
+
+- **Web Server:** Nginx  
+- **Application Server:** Puma  
+- **Hosting:** AWS EC2 (Ubuntu)  
+- **Architecture:** Reverse proxy setup (Nginx → Puma → Rails)
